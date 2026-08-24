@@ -24,7 +24,7 @@ def chat_with_jarvis(request: ChatRequest):
         system_instruction = "Sei JARVIS, un assistente IA avanzato. Rispondi in modo conciso, professionale e diretto in italiano."
         
         response = client.models.generate_content(
-            model='gemini-2.5-flash',
+            model='gemini-2.5.0-flash',
             contents=request.message,
             config={'system_instruction': system_instruction}
         )
