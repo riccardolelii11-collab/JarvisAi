@@ -18,13 +18,14 @@ def read_root():
 @app.post("/api/chat")
 def chat_with_jarvis(request: ChatRequest):
     if not client:
-        raise HTTPException(status_status=500, detail="GEMINI_API_KEY non configurata.")
+        raise HTTPException(status_code=500, detail="GEMINI_API_KEY non configurata.")
     
     try:
         system_instruction = "Sei JARVIS, un assistente IA avanzato. Rispondi in modo conciso, professionale e diretto in italiano."
         
+        # Usiamo un modello stabile e valido
         response = client.models.generate_content(
-            model='gemini-2.5-flash',
+            model='gemini-1.5-flash',
             contents=request.message,
             config={'system_instruction': system_instruction}
         )
