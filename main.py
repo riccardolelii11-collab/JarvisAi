@@ -1,13 +1,29 @@
 import os
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from google import genai
 
 app = FastAPI(title="JARVIS AI Core")
 
+# Configurazione CORS per consentire le chiamate dal frontend
+origins = [
+    "https://chat.tagliaetrasforma.it",
+    "http://localhost:3000",
+    "*"  # Consente chiamate da qualsiasi origine durante la fase di test
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Configurazione Gemini
 api_key = os.getenv("GEMINI_API_KEY")
-model_name = os.getenv("GEMINI_MODEL", "gemini-3.6-flash")
+model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
 client = genai.Client(api_key=api_key) if api_key else None
 
