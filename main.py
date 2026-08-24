@@ -1,14 +1,12 @@
 import os
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-import google.generativeai as genai
+from google import genai
 
 app = FastAPI(title="JARVIS AI Core")
 
-# Configura la chiave API
 api_key = os.getenv("GEMINI_API_KEY")
-if api_key:
-    genai.configure(api_key=api_key)
+client = genai.Client(api_key=api_key) if api_key else None
 
 class ChatRequest(BaseModel):
     message: str
@@ -19,16 +17,17 @@ def read_root():
 
 @app.post("/api/chat")
 def chat_with_jarvis(request: ChatRequest):
-    if not api_key:
-        raise HTTPException(status_code=500, detail="GEMINI_API_KEY non configurata.")
+    if not client:
+        raise HTTPException(status_status=500, detail="GEMINI_API_KEY non configurata.")
     
     try:
-        # Usa il modello stabile e veloce
-        model = genai.GenerativeModel(
-            model_name="gemini-1.5-flash",
-            system_instruction="Sei JARVIS, un assistente IA avanzato. Rispondi in modo conciso, professionale e diretto in italiano."
+        system_instruction = "Sei JARVIS, un assistente IA avanzato. Rispondi in modo conciso, professionale e diretto in italiano."
+        
+        response = client.models.generate_content(
+            model='gemini-2.5-flash',
+            contents=request.message,
+            config={'system_instruction': system_instruction}
         )
-        response = model.generate_content(request.message)
         return {"reply": response.text}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
