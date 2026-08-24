@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#071116" />
+  <title>JARVIS // Neural interface</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="enhancements.css" />
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">J</span><span>JARVIS</span><span class="brand-sub">/ NEURAL INTERFACE</span></div>
+    <div class="system-state"><span class="status-dot"></span><span>SYSTEM ONLINE</span><span class="time" id="clock">00:00:00</span></div>
+  </header>
+
+  <main class="workspace">
+    <section class="command-stage" aria-label="Controllo vocale di Jarvis">
+      <div class="stage-heading">
+        <p class="eyebrow">RICCARDERO'S INDUSTRIES // CORE 07</p>
+        <h1>Come posso aiutarti?</h1>
+        <p class="subheading">Canale vocale pronto. Parla quando vuoi.</p>
+      </div>
+
+      <div class="reactor-wrap" id="reactorWrap">
+        <div class="orbit orbit-outer"></div>
+        <div class="orbit orbit-mid"></div>
+        <div class="orbit orbit-inner"></div>
+        <div class="tick-ring"></div>
+        <div class="reactor-core">
+          <div class="waveform" id="waveform" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <span class="core-label" id="coreLabel">LISTENING</span>
+        </div>
+        <span class="orbit-label label-top">AUDIO INPUT</span>
+        <span class="orbit-label label-bottom">00 / 07 / 24</span>
+      </div>
+
+      <div class="voice-status"><span class="status-dot"></span><span id="voiceStatus">IN ATTESA DELLA TUA VOCE</span></div>
+      <button class="mic-button" id="micButton" type="button" aria-label="Attiva ascolto vocale"><span class="mic-glyph"></span><span class="mic-ripple"></span></button>
+      <p class="mic-hint">Premi per parlare <span>/</span> usa Invio</p>
+    </section>
+
+    <aside class="conversation" aria-label="Conversazione con Jarvis">
+      <div class="conversation-head"><div><p class="eyebrow">LIVE TRANSCRIPT</p><h2>Conversazione</h2></div><button class="clear-button" id="clearButton" type="button" title="Nuova conversazione">+</button></div>
+      <div class="messages" id="messages">
+        <div class="message jarvis-message"><div class="message-meta"><span>JARVIS</span><time>NOW</time></div><p>Buongiorno. I miei sistemi sono online e pronti a ricevere i tuoi comandi.</p></div>
+        <div class="message user-message"><div class="message-meta"><span>TU</span><time>NOW</time></div><p>Che cosa puoi fare per me?</p></div>
+        <div class="message jarvis-message"><div class="message-meta"><span>JARVIS</span><time>NOW</time></div><p>Posso aiutarti a organizzare idee, analizzare informazioni e trasformare una richiesta in azione. Dimmi pure.</p></div>
+      </div>
+      <form class="composer" id="composer"><label for="prompt" class="sr-only">Scrivi un messaggio</label><input id="prompt" autocomplete="off" placeholder="Scrivi a Jarvis..." /><button class="dictation-button" id="dictationButton" type="button" aria-label="Trascrivi voce in testo" title="Trascrivi voce in testo"><span class="small-mic-glyph"></span></button><button type="submit" aria-label="Invia messaggio" title="Invia messaggio"><span>↗</span></button></form>
+      <div class="conversation-footer"><span><i class="mini-dot"></i> ENCRYPTED CHANNEL</span><span id="messageCount">03 MESSAGES</span></div>
+    </aside>
+  </main>
+  <footer class="footer"><span>JARVIS OS v.2.4.1</span><span>LATENCY <b>12MS</b></span><span>SECURE CONNECTION</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+.mic-button {
+  width: 68px;
+  height: 68px;
+  margin-top: 24px;
+  border: 1px solid rgba(101, 239, 255, 0.9);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(101, 239, 255, 0.18), rgba(5, 11, 14, 0.55) 68%);
+  box-shadow: 0 0 0 1px rgba(101, 239, 255, 0.08), 0 0 22px rgba(101, 239, 255, 0.2), inset 0 0 18px rgba(101, 239, 255, 0.12);
+}
+
+.mic-button:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 5px;
+}
+
+.stage-heading {
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.stage-heading h1 {
+  max-width: 100%;
+  line-height: 1.08;
+}
+
+.subheading {
+  margin-top: 20px;
+}
+
+.reactor-wrap {
+  margin-top: 54px;
+}
+
+.voice-status {
+  margin-top: 30px;
+}
+
+.mic-button::before,
+.mic-button::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border: 1px solid rgba(101, 239, 255, 0.22);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.mic-button::after {
+  inset: -13px;
+  border-color: rgba(101, 239, 255, 0.1);
+  border-style: dashed;
+  animation: micOrbit 10s linear infinite;
+}
+
+.mic-glyph {
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 25px;
+  border-width: 2px;
+  border-radius: 9px;
+  transform: translate(-50%, -65%);
+  background: linear-gradient(135deg, rgba(231, 245, 245, 0.95), rgba(101, 239, 255, 0.55));
+  box-shadow: 0 0 8px rgba(101, 239, 255, 0.65), inset 0 0 5px rgba(5, 11, 14, 0.45);
+}
+
+.mic-glyph::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 5px;
+  width: 4px;
+  height: 11px;
+  border-left: 1px solid rgba(101, 239, 255, 0.65);
+  border-right: 1px solid rgba(101, 239, 255, 0.65);
+}
+
+.mic-glyph::after {
+  left: -7px;
+  top: 19px;
+  width: 24px;
+  height: 14px;
+  border-width: 2px;
+  border-top: 0;
+  border-radius: 0 0 14px 14px;
+}
+
+.mic-button.active .mic-glyph {
+  animation: micFloat 0.8s ease-in-out infinite alternate;
+}
+
+.mic-button.active::before {
+  animation: micPulse 1.4s ease-out infinite;
+}
+
+.dictation-button {
+  position: relative;
+  width: 45px;
+  border: 0;
+  border-left: 1px solid var(--line);
+  background: transparent;
+  color: var(--cyan);
+  cursor: pointer;
+}
+
+.dictation-button:hover,
+.dictation-button.active {
+  background: rgba(101, 239, 255, 0.12);
+}
+
+.small-mic-glyph {
+  position: absolute;
+  left: 16px;
+  top: 13px;
+  width: 10px;
+  height: 17px;
+  border: 1.5px solid var(--cyan);
+  border-radius: 7px;
+  box-shadow: 0 0 7px rgba(101, 239, 255, 0.5);
+}
+
+.small-mic-glyph::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 4px;
+  width: 3px;
+  height: 7px;
+  border-left: 1px solid rgba(231, 245, 245, 0.8);
+  border-right: 1px solid rgba(231, 245, 245, 0.8);
+}
+
+.small-mic-glyph::after {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 12px;
+  width: 17px;
+  height: 10px;
+  border: 1.5px solid var(--cyan);
+  border-top: 0;
+  border-radius: 0 0 10px 10px;
+}
+
+@keyframes micOrbit {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes micFloat {
+  to { transform: translate(-50%, calc(-65% - 2px)) scale(1.04); }
+}
+
+@keyframes micPulse {
+  0% { transform: scale(0.92); opacity: 0.8; }
+  100% { transform: scale(1.16); opacity: 0; }
+}
+
+@media (max-width: 800px) {
+  .stage-heading {
+    top: auto;
+  }
+
+  .reactor-wrap {
+    margin-top: 58px;
+  }
+
+  .mic-button {
+    width: 64px;
+    height: 64px;
+  }
+
+  .mic-glyph {
+    left: 24px;
+  }
+}
