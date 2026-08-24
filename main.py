@@ -6,18 +6,16 @@ from google import genai
 
 app = FastAPI(title="JARVIS AI Core")
 
-# Configurazione CORS per consentire le chiamate dal frontend
-origins = [
-    "https://chat.tagliaetrasforma.it",
-    "http://localhost:3000",
-    "*"  # Consente chiamate da qualsiasi origine durante la fase di test
-]
-
+# Consente esplicitamente gli header per la richiesta preflight (OPTIONS)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=[
+        "https://chat.tagliaetrasforma.it",
+        "http://chat.tagliaetrasforma.it",
+        "*"
+    ],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
 
