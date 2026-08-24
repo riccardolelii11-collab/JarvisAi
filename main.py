@@ -6,7 +6,7 @@ from google import genai
 
 app = FastAPI(title="JARVIS AI Core")
 
-# Consente esplicitamente gli header per la richiesta preflight (OPTIONS)
+# Configurazione CORS avanzata per evitare blocchi dal browser e preflight OPTIONS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -19,7 +19,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Configurazione Gemini
+# Configurazione Gemini con il modello aggiornato
 api_key = os.getenv("GEMINI_API_KEY")
 model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
